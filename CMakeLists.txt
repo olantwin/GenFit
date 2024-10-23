@@ -167,22 +167,14 @@ SET(CORE_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/TrackPoint.h
 		${CMAKE_CURRENT_SOURCE_DIR}/finitePlanes/include/RectangularFinitePlane.h
 )
-ROOT_GENERATE_DICTIONARY(
-	    coreRootDict
-		"${CORE_DICTIONARY_SOURCES}"
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/core/src/coreLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/coreRootDict.cxx" "${library_sources}")
+SET(linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/core/src/coreLinkDef.h")
+SET(dictionary_sources  ${CORE_DICTIONARY_SOURCES})
 
 SET(EVENTDISPLAY_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/eventDisplay/include/EventDisplay.h
 )
-ROOT_GENERATE_DICTIONARY(
-	    eventDisplayRootDict
-		"${EVENTDISPLAY_DICTIONARY_SOURCES}"
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/eventDisplay/src/eventDisplayLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/eventDisplayRootDict.cxx" "${library_sources}")
+list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/eventDisplay/src/eventDisplayLinkDef.h")
+list(APPEND dictionary_sources ${EVENTDISPLAY_DICTIONARY_SOURCES})
 
 SET(FITTERS_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/fitters/include/AbsKalmanFitter.h
@@ -194,12 +186,8 @@ SET(FITTERS_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/fitters/include/KalmanFitterInfo.h
 		${CMAKE_CURRENT_SOURCE_DIR}/fitters/include/DAF.h
 )
-ROOT_GENERATE_DICTIONARY(
-	    fittersRootDict
-		"${FITTERS_DICTIONARY_SOURCES}"
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/fitters/src/fittersLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/fittersRootDict.cxx" "${library_sources}")
+list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/fitters/src/fittersLinkDef.h")
+list(APPEND dictionary_sources ${FITTERS_DICTIONARY_SOURCES})
 
 SET(GBL_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/GBL/include/GFGbl.h
@@ -209,12 +197,8 @@ SET(GBL_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/GBL/include/GblFitStatus.h
 		${CMAKE_CURRENT_SOURCE_DIR}/GBL/include/GblData.h
 )
-ROOT_GENERATE_DICTIONARY(
-	    GBLRootDict
-        "${GBL_DICTIONARY_SOURCES}"
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/GBL/src/GBLLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/GBLRootDict.cxx" "${library_sources}")
+list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/GBL/src/GBLLinkDef.h")
+list(APPEND dictionary_sources ${GBL_DICTIONARY_SOURCES})
 
 SET(MEASUREMENTS_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/measurements/include/HMatrixPhi.h
@@ -231,23 +215,15 @@ SET(MEASUREMENTS_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/measurements/include/WirePointMeasurement.h
 		${CMAKE_CURRENT_SOURCE_DIR}/measurements/include/WireTrackCandHit.h
 )
-ROOT_GENERATE_DICTIONARY(
-		measurementsRootDict
-		${MEASUREMENTS_DICTIONARY_SOURCES}
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/measurements/src/measurementsLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/measurementsRootDict.cxx" "${library_sources}")
+list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/measurements/src/measurementsLinkDef.h")
+list(APPEND dictionary_sources ${MEASUREMENTS_DICTIONARY_SOURCES})
 
 SET(TRACKREPS_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/trackReps/include/RKTrackRep.h
 		${CMAKE_CURRENT_SOURCE_DIR}/trackReps/include/MplTrackRep.h
 )
-ROOT_GENERATE_DICTIONARY(
-	    trackRepsRootDict
-		"${TRACKREPS_DICTIONARY_SOURCES}"
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/trackReps/src/trackRepsLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/trackRepsRootDict.cxx" "${library_sources}")
+list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/trackReps/src/trackRepsLinkDef.h")
+list(APPEND dictionary_sources ${TRACKREPS_DICTIONARY_SOURCES})
 
 SET(UTILITIES_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/utilities/include/HelixTrackModel.h
@@ -255,49 +231,29 @@ SET(UTILITIES_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/utilities/include/mySpacepointDetectorHit.h
 		${CMAKE_CURRENT_SOURCE_DIR}/utilities/include/mySpacepointMeasurement.h
 )
-ROOT_GENERATE_DICTIONARY(
-	    utilitiesRootDict
-		"${UTILITIES_DICTIONARY_SOURCES}"
-		LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/utilities/src/utilitiesLinkDef.h"
-)
-SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/utilitiesRootDict.cxx" "${library_sources}")
+list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/utilities/src/utilitiesLinkDef.h")
+list(APPEND dictionary_sources ${UTILITIES_DICTIONARY_SOURCES})
 
 if(DEFINED RAVE)
 	SET(GFRAVE_DICTIONARY_SOURCES
 			${CMAKE_CURRENT_SOURCE_DIR}/GFRave/include/GFRaveTrackParameters.h
 			${CMAKE_CURRENT_SOURCE_DIR}/GFRave/include/GFRaveVertex.h
 	)
-	ROOT_GENERATE_DICTIONARY(
-		    GFRaveRootDict
-			"${GFRAVE_DICTIONARY_SOURCES}"
-			LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/GFRave/src/GFRaveLinkDef.h"
-	)
-	SET(library_sources "${CMAKE_CURRENT_BINARY_DIR}/GFRaveRootDict.cxx" "${library_sources}")
+	list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/GFRave/src/GFRaveLinkDef.h")
+	list(APPEND dictionary_sources ${GFRAVE_DICTIONARY_SOURCES})
 endif()
 
 
 # install
+ROOT_GENERATE_DICTIONARY(
+	    "G__${PROJECT_NAME}"
+	    "${dictionary_sources}"
+	    LINKDEF "${CMAKE_CURRENT_SOURCE_DIR}/LinkDef.h"
+)
+list(APPEND library_sources  "${CMAKE_CURRENT_BINARY_DIR}/G__${PROJECT_NAME}.cxx")
 ADD_SHARED_LIBRARY( ${PROJECT_NAME} ${library_sources})
 INSTALL(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${LIBRARY_OUTPUT_DIRECTORY})
-
-SET(SUBMODULES
-		GBL
-		core
-		eventDisplay
-		fitters
-		measurements
-		trackReps
-		utilities
-)
-
-list(TRANSFORM SUBMODULES PREPEND lib OUTPUT_VARIABLE LIBS)
-list(TRANSFORM LIBS APPEND RootDict OUTPUT_VARIABLE ROOTDICTS)
-list(TRANSFORM ROOTDICTS APPEND .rootmap OUTPUT_VARIABLE ROOTMAPS)
-list(TRANSFORM ROOTDICTS APPEND _rdict.pcm OUTPUT_VARIABLE PCMS)
-list(TRANSFORM PCMS PREPEND ${CMAKE_CURRENT_BINARY_DIR}/)
-list(TRANSFORM ROOTMAPS PREPEND ${CMAKE_CURRENT_BINARY_DIR}/)
-
-INSTALL(FILES ${ROOTMAPS} ${PCMS} DESTINATION ${LIBRARY_OUTPUT_DIRECTORY})
+INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libgenfit2.rootmap ${CMAKE_CURRENT_BINARY_DIR}/libgenfit2_rdict.pcm DESTINATION ${LIBRARY_OUTPUT_DIRECTORY})
 
 # link ROOT libraries
 if(DEFINED RAVE)
