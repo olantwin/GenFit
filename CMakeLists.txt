@@ -161,6 +161,7 @@ SET(CORE_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/StateOnPlane.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/AbsMeasurement.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/ThinScatterer.h
+		${CMAKE_CURRENT_SOURCE_DIR}/core/include/Tools.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/Track.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/TrackCand.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/TrackCandHit.h
