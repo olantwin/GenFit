@@ -9,3 +9,5 @@
 
 #pragma link C++ class genfit::RKTrackRep-;
 #pragma link C++ class genfit::MplTrackRep-;
+#pragma link C++ class genfit::MaterialEffects-;
+#pragma link C++ class genfit::TGeoMaterialInterface-;
