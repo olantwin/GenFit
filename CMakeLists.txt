@@ -151,6 +151,7 @@ SET(CORE_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/AbsHMatrix.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/AbsTrackRep.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/DetPlane.h
+		${CMAKE_CURRENT_SOURCE_DIR}/core/include/FieldManager.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/FitStatus.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/IO.h
 		${CMAKE_CURRENT_SOURCE_DIR}/core/include/Material.h
@@ -222,6 +223,8 @@ list(APPEND dictionary_sources ${MEASUREMENTS_DICTIONARY_SOURCES})
 SET(TRACKREPS_DICTIONARY_SOURCES
 		${CMAKE_CURRENT_SOURCE_DIR}/trackReps/include/RKTrackRep.h
 		${CMAKE_CURRENT_SOURCE_DIR}/trackReps/include/MplTrackRep.h
+		${CMAKE_CURRENT_SOURCE_DIR}/trackReps/include/MaterialEffects.h
+		${CMAKE_CURRENT_SOURCE_DIR}/trackReps/include/TGeoMaterialInterface.h
 )
 list(APPEND linkdefs  "${CMAKE_CURRENT_SOURCE_DIR}/trackReps/src/trackRepsLinkDef.h")
 list(APPEND dictionary_sources ${TRACKREPS_DICTIONARY_SOURCES})
